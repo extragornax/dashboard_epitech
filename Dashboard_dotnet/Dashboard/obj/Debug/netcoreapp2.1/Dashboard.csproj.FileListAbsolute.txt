@@ -1,0 +1,3 @@
+C:\Users\Extra\Documents\Github\dashboard_epitech\Dashboard_dotnet\Dashboard\obj\Debug\netcoreapp2.1\Dashboard.csproj.CoreCompileInputs.cache
+C:\Users\Extra\Documents\Github\dashboard_epitech\Dashboard_dotnet\Dashboard\obj\Debug\netcoreapp2.1\Dashboard.AssemblyInfoInputs.cache
+C:\Users\Extra\Documents\Github\dashboard_epitech\Dashboard_dotnet\Dashboard\obj\Debug\netcoreapp2.1\Dashboard.AssemblyInfo.cs
