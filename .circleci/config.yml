@@ -2,7 +2,7 @@ version: 2
 jobs:
   epitest:
     docker:
-      - image: docker pull epitechcontent/epitest-docker
+      - image: epitechcontent/epitest-docker
     steps:
       - checkout
       - run:
