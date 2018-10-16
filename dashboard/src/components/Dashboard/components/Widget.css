@@ -1,0 +1,10 @@
+.widgets-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.widget {
+    max-width: 20% !important;
+    margin: 0 1%;
+}
