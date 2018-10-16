@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Basic test
-          command: echo "Hello I'm testing things here"
+          command: cd reactjs && npm install && npm start
 
 #           name: Unit Tests Execution
 #           command: ./unit_tests.out -j 1 --xml=tests/results.xml --always-succeed
