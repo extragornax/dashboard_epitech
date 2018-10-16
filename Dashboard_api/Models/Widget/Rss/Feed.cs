@@ -10,26 +10,27 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-
+using System.Xml;
 using Microsoft.AspNetCore.Mvc;
 
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Dashboard.Models.Widgets
 {
 
-    public class WeatherConditionsResult : IWidgetResult
+    public class RssFeedResult : IWidgetResult
     {
         private string _payload;
 
-        public WeatherConditionsResult(string payload)
+        public RssFeedResult(string payload)
         {
             _payload = payload;
         }
 
         public string WidgetName()
         {
-            return "WeatherConditions";
+            return "RssFeed";
         }
         public EWidgetType WidgetType()
         {
@@ -45,22 +46,20 @@ namespace Dashboard.Models.Widgets
         }
     }
 
-    class WeatherConditonsIntake
+    class RssFeedIntake
     {
 
     }
 
-    public class WeatherConditions : IWidget
+    public class RssFeed : IWidget
     {
-        private string _url = "https://api.openweathermap.org/data/2.5/weather?appid={0}&q={1}";
-        private string _passkey = "2254cd740b40a4553ade575f6a057c98";
-
+        private string _url = "https://www.techrepublic.com/rssfeeds/articles/";
         public ObjectId Id { get; set; }
 
-        public string name = "WeatherConditions";
-        public string serviceName = "Weather";
+        public string name = "RssFeed";
+        public string serviceName = "RSS";
 
-        public WeatherConditions() { }
+        public RssFeed() { }
 
         public string Name()
         {
@@ -91,12 +90,14 @@ namespace Dashboard.Models.Widgets
         {
             try
             {
-                Console.WriteLine(String.Format(_url, _passkey, "Paris,fr"));
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format(_url, _passkey, "Paris,fr"));
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_url);
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream resStream = response.GetResponseStream();
+                XmlDocument doc = new XmlDocument();
                 var json = new string(new StreamReader(response.GetResponseStream()).ReadToEnd());
-                return new WeatherConditionsResult(json);
+                doc.LoadXml(json);
+                string jsonText = JsonConvert.SerializeXmlNode(doc);
+                return new WeatherConditionsResult(jsonText);
             }
             catch (SystemException e)
             {
