@@ -1,0 +1,15 @@
+version: '3'
+services:
+  backend:
+    build: ./Dashboard_api
+    network_mode: "host"
+  database:
+    image: mongo
+    command: --smallfiles
+    network_mode: "host"
+    restart: always
+    volumes:
+      - "/root/mongodata:/data/db"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
