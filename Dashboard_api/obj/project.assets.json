@@ -12605,11 +12605,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/extra/projet/dash_arthur/dashboard_api/dashboard_api.csproj",
+      "projectUniqueName": "/home/extra/projet/dashboard/Dashboard_api/dashboard_api.csproj",
       "projectName": "dashboard_api",
-      "projectPath": "/home/extra/projet/dash_arthur/dashboard_api/dashboard_api.csproj",
+      "projectPath": "/home/extra/projet/dashboard/Dashboard_api/dashboard_api.csproj",
       "packagesPath": "/home/extra/.nuget/packages/",
-      "outputPath": "/home/extra/projet/dash_arthur/dashboard_api/obj/",
+      "outputPath": "/home/extra/projet/dashboard/Dashboard_api/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"

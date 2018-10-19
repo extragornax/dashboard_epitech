@@ -12,3 +12,17 @@
 /home/extra/projet/dash_arthur/dashboard_api/obj/Debug/netcoreapp2.1/dashboard_api.RazorTargetAssemblyInfo.cache
 /home/extra/projet/dash_arthur/dashboard_api/obj/Debug/netcoreapp2.1/dashboard_api.dll
 /home/extra/projet/dash_arthur/dashboard_api/obj/Debug/netcoreapp2.1/dashboard_api.pdb
+/home/extra/projet/dashboard/Dashboard_api/obj/Debug/netcoreapp2.1/dashboard_api.csprojAssemblyReference.cache
+/home/extra/projet/dashboard/Dashboard_api/obj/Debug/netcoreapp2.1/dashboard_api.csproj.CoreCompileInputs.cache
+/home/extra/projet/dashboard/Dashboard_api/obj/Debug/netcoreapp2.1/dashboard_api.RazorAssemblyInfo.cache
+/home/extra/projet/dashboard/Dashboard_api/obj/Debug/netcoreapp2.1/dashboard_api.RazorAssemblyInfo.cs
+/home/extra/projet/dashboard/Dashboard_api/obj/Debug/netcoreapp2.1/dashboard_api.AssemblyInfoInputs.cache
+/home/extra/projet/dashboard/Dashboard_api/obj/Debug/netcoreapp2.1/dashboard_api.AssemblyInfo.cs
+/home/extra/projet/dashboard/Dashboard_api/obj/Debug/netcoreapp2.1/dashboard_api.dll
+/home/extra/projet/dashboard/Dashboard_api/obj/Debug/netcoreapp2.1/dashboard_api.pdb
+/home/extra/projet/dashboard/Dashboard_api/bin/Debug/netcoreapp2.1/dashboard_api.deps.json
+/home/extra/projet/dashboard/Dashboard_api/bin/Debug/netcoreapp2.1/dashboard_api.runtimeconfig.json
+/home/extra/projet/dashboard/Dashboard_api/bin/Debug/netcoreapp2.1/dashboard_api.runtimeconfig.dev.json
+/home/extra/projet/dashboard/Dashboard_api/bin/Debug/netcoreapp2.1/dashboard_api.dll
+/home/extra/projet/dashboard/Dashboard_api/bin/Debug/netcoreapp2.1/dashboard_api.pdb
+/home/extra/projet/dashboard/Dashboard_api/obj/Debug/netcoreapp2.1/dashboard_api.RazorTargetAssemblyInfo.cache

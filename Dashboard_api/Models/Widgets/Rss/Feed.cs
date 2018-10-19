@@ -1,33 +1,41 @@
+/*
+** EPITECH PROJECT, 2018
+** Dashboard_api
+** File description:
+** Conditions
+*/
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-
+using System.Xml;
 using Microsoft.AspNetCore.Mvc;
 
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace dashboard_api.Models.Widgets
 {
 
-    public class WeatherConditionsResult : IWidgetResult
+    public class RssFeedResult : IWidgetResult
     {
         private string _payload;
 
-        public WeatherConditionsResult(string payload)
+        public RssFeedResult(string payload)
         {
             _payload = payload;
         }
 
         public string WidgetName()
         {
-            return "WeatherConditions";
+            return "RssFeed";
         }
         public EWidgetType WidgetType()
         {
-            return EWidgetType.WeatherConditon;
+            return EWidgetType.Error;
         }
         public string Payload()
         {
@@ -39,44 +47,41 @@ namespace dashboard_api.Models.Widgets
         }
     }
 
-    class WeatherConditonsIntake
+    class RssFeedIntake
     {
 
     }
 
-    [MongoDB.Bson.Serialization.Attributes.BsonDiscriminator("WidgetWeatherConditions")]
-    public class WeatherConditions : IWidget
+    [MongoDB.Bson.Serialization.Attributes.BsonDiscriminator("RssFeed")]
+    public class RssFeed : IWidget
     {
-        private string url = "https://api.openweathermap.org/data/2.5/weather?q={1}&appid={0}";
-        private string key = "4a535c75fe9b1848c8e3075c0d41c30d";
+        private string _url = "https://www.techrepublic.com/rssfeeds/articles/";
 
-        private string city = "Paris,fr";
-
-        public WeatherConditions() : base("WeatherConditions", EWidgetType.WeatherConditon, "Weather")
+        public RssFeed() : base("RssFeed", EWidgetType.RssFeed, "Rss")
         {
             Parameters = new List<Params>();
-            Parameters.Add(new Params { data = "city", type = "string" });
+            Parameters.Add(new Params { data = "url", type = "string" });
         }
 
         public override void Intake(string val)
         {
-            city = val;
+            _url = val;
         }
+
         public override void Intake(int val) { }
 
         public override IWidgetResult Invoke(User user)
         {
             try
             {
-                Console.WriteLine(String.Format(url, key, city));
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format(url, key,
-                    city));
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_url);
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 Stream resStream = response.GetResponseStream();
+                XmlDocument doc = new XmlDocument();
                 var json = new string(new StreamReader(response.GetResponseStream()).ReadToEnd());
-                System.Console.WriteLine(response);
-                System.Console.WriteLine(json);
-                return new WeatherConditionsResult(json);
+                doc.LoadXml(json);
+                string jsonText = JsonConvert.SerializeXmlNode(doc);
+                return new WeatherConditionsResult(jsonText);
             }
             catch (SystemException e)
             {
