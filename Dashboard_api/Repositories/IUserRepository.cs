@@ -1,16 +1,7 @@
-/*
-** EPITECH PROJECT, 2018
-** Dashboard_api
-** File description:
-** IUserRepository
-*/
-
 using System.Collections.Generic;
 
-namespace Dashboard.Models
-{
-    public interface IUserRepository
-    {
+namespace dashboard_api.Models {
+    public interface IUserRepository {
         IEnumerable<User> GetAll();
         long CountAll();
         User Get(string id);

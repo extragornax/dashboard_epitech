@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Dashboard.csproj"
+                "${workspaceFolder}/dashboard_api.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

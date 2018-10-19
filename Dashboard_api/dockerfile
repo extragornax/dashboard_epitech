@@ -1,8 +1,8 @@
 FROM microsoft/dotnet
 
-WORKDIR app
+WORKDIR /app
 
-COPY . .
+COPY ./dashboard_api.csproj /app
 
 RUN dotnet restore
 

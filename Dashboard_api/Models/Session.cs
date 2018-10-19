@@ -1,17 +1,8 @@
-/*
-** EPITECH PROJECT, 2018
-** Dashboard_api
-** File description:
-** Session
-*/
-
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Dashboard.Models
-{
-    public class Session
-    {
+namespace dashboard_api.Models {
+    public class Session {
         [BsonId]
         public ObjectId Id { get; set; }
         public ObjectId UserId { get; set; }

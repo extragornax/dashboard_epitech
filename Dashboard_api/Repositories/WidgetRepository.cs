@@ -4,20 +4,20 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace dashboard_api.Models {
-    public class SessionRepository : ISessionRepository {
+    public class WidgetRepository {
         private MongoClient _dbClient;
         private IMongoDatabase _database;
-        private IMongoCollection<Session> _collection;
+        private IMongoCollection<Widgets.IWidget> _collection;
 
-        public SessionRepository(string connection) {
+        public WidgetRepository(string connection) {
             if (string.IsNullOrWhiteSpace(connection))
                 connection = "mongodb://root:example@localhost:27017";
             _dbClient = new MongoDB.Driver.MongoClient(connection);
             _database = _dbClient.GetDatabase("dashboard");
-            _collection = _database.GetCollection<Session>("Session");
+            _collection = _database.GetCollection<Widgets.IWidget>("Widget");
         }
 
-        public IEnumerable<Session> GetAll() {
+        public IEnumerable<Widgets.IWidget> GetAll() {
             return _collection.Find(new BsonDocument()).ToList();
         }
 
@@ -26,31 +26,35 @@ namespace dashboard_api.Models {
             return count;
         }
 
-        public Session Get(string id) {
-            var filter = Builders<Session>.Filter.Eq("_id", ObjectId.Parse(id));
+        public Widgets.IWidget Get(string id) {
+            var filter = Builders<Widgets.IWidget>.Filter.Eq("_id", ObjectId.Parse(id));
             return _collection.Find(filter).FirstOrDefault();
         }
 
-        public Session GetByUserId(string userId) {
-            var filter = Builders<Session>.Filter.Eq("UserId", ObjectId.Parse(userId));
+        public Widgets.IWidget GetByName(string name) {
+            var filter = Builders<Widgets.IWidget>.Filter.Eq("Name", name);
             return _collection.Find(filter).FirstOrDefault();
         }
 
-        public Session Add(Session item) {
+        public Widgets.IWidget Add(Widgets.IWidget item) {
             _collection.InsertOne(item);
             return item;
         }
 
         public bool Remove(string id) {
-            var filter = Builders<Session>.Filter.Eq("_id", id);
+            var filter = Builders<Widgets.IWidget>.Filter.Eq("_id", id);
             var result = _collection.DeleteOne(filter);
             return result.DeletedCount == 1;
         }
 
-        public Session Update(string id, Session item) {
-            var filter = Builders<Session>.Filter.Eq("_id", id);
+        public Widgets.IWidget Update(string id, Widgets.IWidget item) {
+            var filter = Builders<Widgets.IWidget>.Filter.Eq("_id", id);
             var result = _collection.FindOneAndReplace(filter, item);
             return result;
+        }
+
+        public void Drop() {
+            _collection.DeleteMany(new BsonDocument());
         }
     }
 }
