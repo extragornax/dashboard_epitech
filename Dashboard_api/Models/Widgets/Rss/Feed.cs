@@ -11,6 +11,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Xml;
 using Microsoft.AspNetCore.Mvc;
 
@@ -65,6 +66,9 @@ namespace dashboard_api.Models.Widgets
 
         public override void Intake(string val)
         {
+            Console.WriteLine("New URL " + val);
+            val = HttpUtility.UrlDecode(val);
+            Console.WriteLine("AFTER New URL " + val);
             _url = val;
         }
 

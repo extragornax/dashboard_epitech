@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -5,39 +6,47 @@ using System.Net.Http.Headers;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace dashboard_api.Controllers {
+namespace dashboard_api.Controllers
+{
     [Route("[controller]")]
     [ApiController]
-    public class WidgetController : ControllerBase {
+    public class WidgetController : ControllerBase
+    {
         private static Models.WidgetRepository widgetRepo = new Models.WidgetRepository("");
 
-        public WidgetController() {
+        public WidgetController()
+        {
 
             // var widgets
 
-            if (widgetRepo.CountAll() == 0) {
+            if (widgetRepo.CountAll() == 0)
+            {
                 // widgetRepo.Add(new Models.Widget { Name = "toto", Password = "tata" });
             }
         }
 
         [HttpGet]
-        public ActionResult<List<Models.Widgets.IWidget>> GetAll() {
+        public ActionResult<List<Models.Widgets.IWidget>> GetAll()
+        {
             var request = Request;
             var header = request.Headers;
             return widgetRepo.GetAll().ToList();
         }
 
         [HttpGet("{id}", Name = "GetWidget")]
-        public ActionResult<Models.Widgets.IWidget> GetById(string id) {
+        public ActionResult<Models.Widgets.IWidget> GetById(string id)
+        {
             var item = widgetRepo.Get(id);
-            if (item == null) {
+            if (item == null)
+            {
                 return NotFound();
             }
             return item;
         }
 
         [HttpPost]
-        public IActionResult Create(Models.Widgets.IWidget item) {
+        public IActionResult Create(Models.Widgets.IWidget item)
+        {
             widgetRepo.Add(item);
             return CreatedAtRoute("GetWidget", new { id = item.Id }, item);
         }
@@ -64,9 +73,11 @@ namespace dashboard_api.Controllers {
         // }
 
         [HttpGet("{id}/invoke", Name = "InvokeWidget0")]
-        public ActionResult<string> InvokeById(string id) {
+        public ActionResult<string> InvokeById(string id)
+        {
             var item = widgetRepo.Get(id);
-            if (item == null) {
+            if (item == null)
+            {
                 return NotFound();
             }
             var result = item.Invoke(new Models.User());
@@ -75,10 +86,13 @@ namespace dashboard_api.Controllers {
         }
 
         [HttpGet("{id}/invoke/{param1}", Name = "InvokeWidget1")]
-        public ActionResult<string> InvokeById(string id, string param1) {
+        public ActionResult<string> InvokeById(string id, string param1)
+        {
+            Console.WriteLine("PARAM = " + param1);
             var item = widgetRepo.Get(id);
             item.Intake(param1);
-            if (item == null) {
+            if (item == null)
+            {
                 return NotFound();
             }
             var result = item.Invoke(new Models.User());
@@ -87,11 +101,13 @@ namespace dashboard_api.Controllers {
         }
 
         [HttpGet("{id}/invoke/{param1}/{param2}", Name = "InvokeWidget")]
-        public ActionResult<string> InvokeById(string id, string param1, string param2) {
+        public ActionResult<string> InvokeById(string id, string param1, string param2)
+        {
             var item = widgetRepo.Get(id);
             item.Intake(param1);
             item.Intake(param2);
-            if (item == null) {
+            if (item == null)
+            {
                 return NotFound();
             }
             var result = item.Invoke(new Models.User());
