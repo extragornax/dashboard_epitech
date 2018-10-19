@@ -51,27 +51,6 @@ namespace dashboard_api.Controllers
             return CreatedAtRoute("GetWidget", new { id = item.Id }, item);
         }
 
-        // [HttpGet("{id}/invoke", Name = "InvokeWidget")]
-        // public HttpResponseMessage InvokeById(string id) {
-        //     var item = widgetRepo.Get(id);
-        //     if (item == null) {
-        //         var resp = new HttpResponseMessage() {
-        //         StatusCode = System.Net.HttpStatusCode.NotFound
-        //         };
-        //         return resp;
-        //     } else {
-        //         var user = new Models.User();
-        //         var toto = item.Invoke(user);
-        //         var resp = new HttpResponseMessage() {
-        //             Content = new StringContent(toto.Payload()),
-        //             StatusCode = (toto.WidgetType() == Models.Widgets.EWidgetType.Error) ? System.Net.HttpStatusCode.InternalServerError : System.Net.HttpStatusCode.OK
-        //             // Content = new StringContent("[{\"Name\":\"ABC\"},[{\"A\":\"1\"},{\"B\":\"2\"},{\"C\":\"3\"}]]")
-        //         };
-        //         resp.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-        //         return resp;
-        //     }
-        // }
-
         [HttpGet("{id}/invoke", Name = "InvokeWidget0")]
         public ActionResult<string> InvokeById(string id)
         {

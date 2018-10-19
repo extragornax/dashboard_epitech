@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using dashboard_api.Models.Widgets;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -29,16 +29,16 @@ namespace dashboard_api.Models
                 _collection.DeleteMany(new BsonDocument());
                 var service = new Service();
                 service.Name = "weather";
-                var widget = new Widgets.WeatherConditions();
+                IWidget widget = new Widgets.WeatherConditions();
                 widgets.Add(widget);
                 service.Widgets.Add(widget);
                 _collection.InsertOne(service);
 
                 service = new Service();
                 service.Name = "rss";
-                var widgetrss = new Widgets.RssFeed();
-                widgets.Add(widgetrss);
-                service.Widgets.Add(widgetrss);
+                widget = new Widgets.RssFeed();
+                widgets.Add(widget);
+                service.Widgets.Add(widget);
                 _collection.InsertOne(service);
             }
         }
