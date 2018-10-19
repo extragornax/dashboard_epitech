@@ -25,8 +25,6 @@ namespace Dashboard.Models
             _dbClient = new MongoDB.Driver.MongoClient(connection);
             _database = _dbClient.GetDatabase("dashboard");
             _collection = _database.GetCollection<Service>("Service");
-
-            System.Console.WriteLine("patate");
             var count = _collection.CountDocuments(new BsonDocument());
             if (count != 1)
             {
@@ -34,7 +32,8 @@ namespace Dashboard.Models
                 var service = new Service();
                 service.Name = "weather";
                 service.Widgets.Add(new Widgets.WeatherConditions());
-                service.Widgets.Add(new Widgets.WeatherConditions());
+                service.Name = "rss";
+                service.Widgets.Add(new Widgets.RssFeed());
                 _collection.InsertOne(service);
             }
         }
