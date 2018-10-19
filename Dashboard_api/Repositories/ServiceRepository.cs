@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 
 namespace Dashboard.Models
@@ -32,12 +33,13 @@ namespace Dashboard.Models
                 var service = new Service();
                 service.Name = "weather";
                 service.Widgets.Add(new Widgets.WeatherConditions());
+                _collection.InsertOne(service);
+                service = new Service();
                 service.Name = "rss";
                 service.Widgets.Add(new Widgets.RssFeed());
                 _collection.InsertOne(service);
             }
         }
-
         public IEnumerable<Service> GetAll()
         {
             return _collection.Find(new BsonDocument()).ToList();
