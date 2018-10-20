@@ -8,8 +8,14 @@ services:
     command: --smallfiles
     network_mode: "host"
     restart: always
+    privileged: true
     volumes:
       - "/root/mongodata:/data/db"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+#  frontend:
+ #   build: ./Dashboard_front
+    # network_mode: "port"
+  #  ports:
+   #   - "80:3000"
