@@ -47,7 +47,7 @@ namespace Dashboard.Models.Widgets
     [MongoDB.Bson.Serialization.Attributes.BsonDiscriminator("WidgetWeatherConditions")]
     public class WeatherConditions : IWidget
     {
-        private string url = "https://api.openweathermap.org/data/2.5/weather?q={1}&appid=2254cd740b40a4553ade575f6a057c98";
+        private string url = "https://api.openweathermap.org/data/2.5/weather?q={0}&appid=2254cd740b40a4553ade575f6a057c98";
 
         private string town = "Paris,fr";
 
@@ -70,6 +70,7 @@ namespace Dashboard.Models.Widgets
                 string final_url = String.Format(url, town);
                 var cli = new WebClient();
                 string data = cli.DownloadString(final_url);
+                Console.WriteLine("RETURNING -> " + data);
                 return new WeatherConditionsResult(data);
             }
             catch (SystemException e)
