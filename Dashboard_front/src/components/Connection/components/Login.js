@@ -14,7 +14,7 @@ export default class Login extends Component {
 		super(props);
 	
 		this.state = {
-			email: "",
+			name: "",
 			password: "",
 		};
 	}
@@ -29,16 +29,15 @@ export default class Login extends Component {
 	async onSubmit(e) {
 		e.preventDefault();
 
-		const { email, password } = this.state;
+		const { name, password } = this.state;
 
-		if (!email || !password)
+		if (!name || !password)
 			return;
-
 		const options = {
 			method: 'POST',
-			url: 'http://requestbin.fullcontact.com/1jw34841',
+			url: '/api/Session',
 			data: {
-				email,
+				name,
 				password,
 			}
 	}
@@ -46,7 +45,8 @@ export default class Login extends Component {
 		const res = await axios(options);
 		/* A checker le retour de la requête */
 		localStorage.setItem('token', res.data);
-		this.props.push('/');
+		console.log(res);
+		this.props.push('/dashboard');
 	}
 
 	render() {
@@ -57,15 +57,15 @@ export default class Login extends Component {
 				className="login-form"
 			>
 				<Col componentClass={ControlLabel} sm={2}>
-					Email
+					Login
 				</Col>
 				<Col sm={10}>
 					<FormControl
-						type="email"
-						label="Email"
-						placeholder="Email"
-						value={ this.state.email }
-						onChange={ e => this.onUpdateInput.bind(this)(e, 'email') }
+						type="text"
+						label="text"
+						placeholder="Login"
+						value={ this.state.name }
+						onChange={ e => this.onUpdateInput.bind(this)(e, 'name') }
 					/>
 				</Col>
 

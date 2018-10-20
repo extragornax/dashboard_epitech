@@ -38,18 +38,19 @@ export default class Register extends Component {
 
 		if (password !== password2)
 			return;
-
-		const options = {
-			method: 'POST',
-			url: 'http://requestbin.fullcontact.com/1jw34841',
-			data: {
-				username,
-				email,
-				password,
-			}
-	}
-
+			const name=username;
+			
+			const options = {
+				method: 'POST',
+				url: '/api/user',
+				data: {
+					name,
+					password,
+				}
+		}
 		const res = await axios(options);
+
+		console.log(res.status)
 	}
 
 	render() {
