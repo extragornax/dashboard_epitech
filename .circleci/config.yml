@@ -2,7 +2,7 @@ version: 2
 jobs:
   epitest:
     docker:
-      - image: docker/compose:1.23.0-rc3
+      - image: epitechcontent/epitest-docker
     steps:
       - checkout
       - run:
