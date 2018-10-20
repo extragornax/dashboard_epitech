@@ -2,7 +2,7 @@ version: 2
 jobs:
   epitest:
     docker:
-      - image: docker
+      - image: docker/compose
     steps:
       - checkout
       - run:
