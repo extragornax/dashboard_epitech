@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -52,6 +53,7 @@ namespace dashboard_api.Models.Widgets
         public readonly string Name;
         public readonly EWidgetType Type;
         public readonly string ServiceName;
+        [JsonProperty(PropertyName = "params")]
         public List<Params> Parameters;
 
         public IWidget(string name, EWidgetType type, string serviceName)
