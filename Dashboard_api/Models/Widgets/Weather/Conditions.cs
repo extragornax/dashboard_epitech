@@ -55,7 +55,7 @@ namespace Dashboard.Models.Widgets
     public class WeatherConditions : IWidget
     {
         private string url = "https://api.openweathermap.org/data/2.5/weather?q={1}&appid={0}";
-        private string key = "4a535c75fe9b1848c8e3075c0d41c30d";
+        private string key = "2254cd740b40a4553ade575f6a057c98";
 
         private string city = "Paris,fr";
 
@@ -75,15 +75,10 @@ namespace Dashboard.Models.Widgets
         {
             try
             {
-                Console.WriteLine(String.Format(url, key, city));
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(String.Format(url, key,
-                    city));
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                Stream resStream = response.GetResponseStream();
-                var json = new string(new StreamReader(response.GetResponseStream()).ReadToEnd());
-                System.Console.WriteLine(response);
-                System.Console.WriteLine(json);
-                return new WeatherConditionsResult(json);
+                string final_url = String.Format(url, key, city);
+                var cli = new WebClient();
+                string data = cli.DownloadString(final_url);
+                return new WeatherConditionsResult(data);
             }
             catch (SystemException e)
             {

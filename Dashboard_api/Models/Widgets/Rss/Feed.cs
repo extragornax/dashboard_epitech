@@ -78,12 +78,10 @@ namespace Dashboard.Models.Widgets
         {
             try
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_url);
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                Stream resStream = response.GetResponseStream();
+                var cli = new WebClient();
+                string data = cli.DownloadString(_url);
                 XmlDocument doc = new XmlDocument();
-                var json = new string(new StreamReader(response.GetResponseStream()).ReadToEnd());
-                doc.LoadXml(json);
+                doc.LoadXml(data);
                 string jsonText = JsonConvert.SerializeXmlNode(doc);
                 return new WeatherConditionsResult(jsonText);
             }
