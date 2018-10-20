@@ -1,7 +1,16 @@
+/*
+** EPITECH PROJECT, 2018
+** dashboard
+** File description:
+** ISessionRepository
+*/
+
 using System.Collections.Generic;
 
-namespace dashboard_api.Models {
-    public interface ISessionRepository {
+namespace Dashboard.Models
+{
+    public interface ISessionRepository
+    {
         IEnumerable<Session> GetAll();
         long CountAll();
         Session Get(string id);

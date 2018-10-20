@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2018
+** dashboard
+** File description:
+** IWidget
+*/
+
 using System.Collections.Generic;
 
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +14,7 @@ using Newtonsoft.Json;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace dashboard_api.Models.Widgets
+namespace Dashboard.Models.Widgets
 {
 
     public enum EWidgetType

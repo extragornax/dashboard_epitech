@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2018
+** dashboard
+** File description:
+** AboutController
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +13,7 @@ using System.Net.Http.Headers;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace dashboard_api.Controllers
+namespace Dashboard.Controllers
 {
     [Route("about.json")]
     [ApiController]

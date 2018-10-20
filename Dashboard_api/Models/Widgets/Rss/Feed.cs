@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2018
-** Dashboard_api
+** Dashboard
 ** File description:
 ** Conditions
 */
@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
-namespace dashboard_api.Models.Widgets
+namespace Dashboard.Models.Widgets
 {
 
     public class RssFeedResult : IWidgetResult

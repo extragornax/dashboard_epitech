@@ -1,7 +1,14 @@
+/*
+** EPITECH PROJECT, 2018
+** dashboard
+** File description:
+** About
+*/
+
 using System;
 using System.Collections.Generic;
 
-namespace dashboard_api.Models
+namespace Dashboard.Models
 {
 
     public class AboutClient

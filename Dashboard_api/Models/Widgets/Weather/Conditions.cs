@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2018
+** dashboard
+** File description:
+** Conditions
+*/
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +16,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using MongoDB.Bson;
 
-namespace dashboard_api.Models.Widgets
+namespace Dashboard.Models.Widgets
 {
 
     public class WeatherConditionsResult : IWidgetResult

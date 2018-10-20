@@ -12605,9 +12605,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/extra/projet/dashboard/Dashboard_api/dashboard_api.csproj",
-      "projectName": "dashboard_api",
-      "projectPath": "/home/extra/projet/dashboard/Dashboard_api/dashboard_api.csproj",
+      "projectUniqueName": "/home/extra/projet/dashboard/Dashboard_api/Dashboard.csproj",
+      "projectName": "Dashboard",
+      "projectPath": "/home/extra/projet/dashboard/Dashboard_api/Dashboard.csproj",
       "packagesPath": "/home/extra/.nuget/packages/",
       "outputPath": "/home/extra/projet/dashboard/Dashboard_api/obj/",
       "projectStyle": "PackageReference",

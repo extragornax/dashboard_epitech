@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2018
+** dashboard
+** File description:
+** WidgetController
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +13,9 @@ using System.Net.Http.Headers;
 
 using Microsoft.AspNetCore.Mvc;
 
-namespace dashboard_api.Controllers
+namespace Dashboard.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class WidgetController : ControllerBase
     {
@@ -17,12 +24,6 @@ namespace dashboard_api.Controllers
         public WidgetController()
         {
 
-            // var widgets
-
-            if (widgetRepo.CountAll() == 0)
-            {
-                // widgetRepo.Add(new Models.Widget { Name = "toto", Password = "tata" });
-            }
         }
 
         [HttpGet]

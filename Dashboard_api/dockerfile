@@ -2,7 +2,7 @@ FROM microsoft/dotnet
 
 WORKDIR /app
 
-COPY ./dashboard_api.csproj /app
+COPY ./Dashboard.csproj /app
 
 RUN dotnet restore
 

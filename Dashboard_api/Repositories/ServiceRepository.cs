@@ -1,9 +1,16 @@
+/*
+** EPITECH PROJECT, 2018
+** dashboard
+** File description:
+** ServiceRepository
+*/
+
 using System.Collections.Generic;
-using dashboard_api.Models.Widgets;
+using Dashboard.Models.Widgets;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace dashboard_api.Models
+namespace Dashboard.Models
 {
     public class ServiceRepository
     {
@@ -18,8 +25,6 @@ namespace dashboard_api.Models
             _dbClient = new MongoDB.Driver.MongoClient(connection);
             _database = _dbClient.GetDatabase("dashboard");
             _collection = _database.GetCollection<Service>("Service");
-
-            System.Console.WriteLine("patate");
             var count = _collection.CountDocuments(new BsonDocument());
 
             if (count == 0)

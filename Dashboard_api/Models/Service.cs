@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2018
+** dashboard
+** File description:
+** Service
+*/
+
 using System.Collections.Generic;
 
 using Microsoft.EntityFrameworkCore;
@@ -5,11 +12,14 @@ using Microsoft.EntityFrameworkCore;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace dashboard_api.Models {
+namespace Dashboard.Models
+{
 
-    public class Service {
+    public class Service
+    {
 
-        public Service() {
+        public Service()
+        {
             Name = "";
             Widgets = new List<Widgets.IWidget>();
         }

@@ -1,11 +1,20 @@
+/*
+** EPITECH PROJECT, 2018
+** dashboard
+** File description:
+** User
+*/
+
 using Microsoft.EntityFrameworkCore;
 
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace dashboard_api.Models {
+namespace Dashboard.Models
+{
 
-    public class User {
+    public class User
+    {
         [BsonId]
         public ObjectId Id { get; set; }
         public ObjectId SessionId { get; set; }
