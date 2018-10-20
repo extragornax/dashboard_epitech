@@ -21,9 +21,7 @@ namespace Dashboard.Controllers
         public UserController()
         {
             if (userRepo.CountAll() == 0)
-            {
-                userRepo.Add(new Models.User { Name = "toto", Password = "tata" });
-            }
+                userRepo.Add(new Models.User { Name = "Extra", Password = "Cheap" });
         }
 
         [HttpGet]
