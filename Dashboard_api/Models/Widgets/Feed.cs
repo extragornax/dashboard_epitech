@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Xml;
 using Microsoft.AspNetCore.Mvc;
-
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
@@ -23,11 +22,11 @@ namespace Dashboard.Models.Widgets
 
     public class RssFeedResult : IWidgetResult
     {
-        private string _payload;
+        private string _dataPackage;
 
-        public RssFeedResult(string payload)
+        public RssFeedResult(string DataPackage)
         {
-            _payload = payload;
+            _dataPackage = DataPackage;
         }
 
         public string WidgetName()
@@ -38,19 +37,14 @@ namespace Dashboard.Models.Widgets
         {
             return EWidgetType.Error;
         }
-        public string Payload()
+        public string DataPackage()
         {
-            return _payload;
+            return _dataPackage;
         }
-        public void Payload(string payload)
+        public void DataPackage(string DataPackage)
         {
-            _payload = payload;
+            _dataPackage = DataPackage;
         }
-    }
-
-    class RssFeedIntake
-    {
-
     }
 
     [MongoDB.Bson.Serialization.Attributes.BsonDiscriminator("RssFeed")]

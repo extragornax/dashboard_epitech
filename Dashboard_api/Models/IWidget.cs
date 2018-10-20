@@ -6,11 +6,9 @@
 */
 
 using System.Collections.Generic;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -27,7 +25,7 @@ namespace Dashboard.Models.Widgets
     public interface IWidgetResult
     {
         string WidgetName();
-        string Payload();
+        string DataPackage();
         EWidgetType WidgetType();
     }
 
@@ -41,7 +39,7 @@ namespace Dashboard.Models.Widgets
         {
             return EWidgetType.Error;
         }
-        public string Payload()
+        public string DataPackage()
         {
             return "";
         }

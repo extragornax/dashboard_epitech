@@ -62,7 +62,7 @@ namespace Dashboard.Controllers
             }
             var result = item.Invoke(new Models.User());
 
-            return this.Content(result.Payload(), "application/json");
+            return this.Content(result.DataPackage(), "application/json");
         }
 
         [HttpGet("{id}/invoke/{param1}", Name = "InvokeWidget1")]
@@ -77,7 +77,7 @@ namespace Dashboard.Controllers
             }
             var result = item.Invoke(new Models.User());
 
-            return this.Content(result.Payload(), "application/json");
+            return this.Content(result.DataPackage(), "application/json");
         }
 
         [HttpGet("{id}/invoke/{param1}/{param2}", Name = "InvokeWidget")]
@@ -92,7 +92,7 @@ namespace Dashboard.Controllers
             }
             var result = item.Invoke(new Models.User());
 
-            return this.Content(result.Payload(), "application/json");
+            return this.Content(result.DataPackage(), "application/json");
         }
     }
 }

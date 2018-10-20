@@ -11,9 +11,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-
 using Microsoft.AspNetCore.Mvc;
-
 using MongoDB.Bson;
 
 namespace Dashboard.Models.Widgets
@@ -21,11 +19,11 @@ namespace Dashboard.Models.Widgets
 
     public class WeatherConditionsResult : IWidgetResult
     {
-        private string _payload;
+        private string _dataPackage;
 
-        public WeatherConditionsResult(string payload)
+        public WeatherConditionsResult(string DataPackage)
         {
-            _payload = payload;
+            _dataPackage = DataPackage;
         }
 
         public string WidgetName()
@@ -36,38 +34,32 @@ namespace Dashboard.Models.Widgets
         {
             return EWidgetType.WeatherConditon;
         }
-        public string Payload()
+        public string DataPackage()
         {
-            return _payload;
+            return _dataPackage;
         }
-        public void Payload(string payload)
+        public void DataPackage(string data)
         {
-            _payload = payload;
+            _dataPackage = data;
         }
-    }
-
-    class WeatherConditonsIntake
-    {
-
     }
 
     [MongoDB.Bson.Serialization.Attributes.BsonDiscriminator("WidgetWeatherConditions")]
     public class WeatherConditions : IWidget
     {
-        private string url = "https://api.openweathermap.org/data/2.5/weather?q={1}&appid={0}";
-        private string key = "2254cd740b40a4553ade575f6a057c98";
+        private string url = "https://api.openweathermap.org/data/2.5/weather?q={1}&appid=2254cd740b40a4553ade575f6a057c98";
 
-        private string city = "Paris,fr";
+        private string town = "Paris,fr";
 
         public WeatherConditions() : base("WeatherConditions", EWidgetType.WeatherConditon, "Weather")
         {
             Parameters = new List<Params>();
-            Parameters.Add(new Params { data = "city", type = "string" });
+            Parameters.Add(new Params { data = "town", type = "string" });
         }
 
-        public override void Intake(string val)
+        public override void Intake(string value)
         {
-            city = val;
+            town = value;
         }
         public override void Intake(int val) { }
 
@@ -75,7 +67,7 @@ namespace Dashboard.Models.Widgets
         {
             try
             {
-                string final_url = String.Format(url, key, city);
+                string final_url = String.Format(url, town);
                 var cli = new WebClient();
                 string data = cli.DownloadString(final_url);
                 return new WeatherConditionsResult(data);
