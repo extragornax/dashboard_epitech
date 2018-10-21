@@ -1,0 +1,15 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.login-form label {
+    text-align: left !important;
+}
+
+.form-control {
+    margin-bottom: 20px;
+}
