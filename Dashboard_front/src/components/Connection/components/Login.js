@@ -45,7 +45,6 @@ export default class Login extends Component {
 		const res = await axios(options);
 		/* A checker le retour de la requête */
 		localStorage.setItem('token', res.data);
-		console.log(res);
 		this.props.push('/dashboard');
 	}
 
