@@ -2,7 +2,7 @@ FROM node
 
 WORKDIR /webapp
 
-COPY package*.json ./
+COPY package*.json /webapp/
 
 RUN npm install -v
 
