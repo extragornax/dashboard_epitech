@@ -45,6 +45,13 @@ namespace Dashboard.Models
                 widgets.Add(widget);
                 service.Widgets.Add(widget);
                 _collection.InsertOne(service);
+
+                service = new Service();
+                service.Name = "tempconversion";
+                widget = new Widgets.TempUnitConversion();
+                widgets.Add(widget);
+                service.Widgets.Add(widget);
+                _collection.InsertOne(service);
             }
         }
 

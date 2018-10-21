@@ -20,6 +20,7 @@ namespace Dashboard.Models.Widgets
         Error,
         WeatherConditon,
         RssFeed,
+        TempUnitConversion,
     }
 
     public interface IWidgetResult
@@ -51,7 +52,7 @@ namespace Dashboard.Models.Widgets
         public string type;
     }
 
-    [BsonKnownTypes(typeof(RssFeed), typeof(WeatherConditions))]
+    [BsonKnownTypes(typeof(RssFeed), typeof(WeatherConditions), typeof(TempUnitConversion))]
     public abstract class IWidget
     {
         public ObjectId Id { get; set; }
