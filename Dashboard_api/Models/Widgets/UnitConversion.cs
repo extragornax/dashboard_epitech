@@ -25,27 +25,15 @@ namespace Dashboard.Models.Widgets
     {
         private string _dataPackage;
 
-        public TempUnitConversionResult(string DataPackage)
-        {
-            _dataPackage = DataPackage;
-        }
+        public TempUnitConversionResult(string DataPackage) { _dataPackage = DataPackage; }
 
-        public string WidgetName()
-        {
-            return "TempUnitConversion";
-        }
-        public EWidgetType WidgetType()
-        {
-            return EWidgetType.Error;
-        }
-        public string DataPackage()
-        {
-            return _dataPackage;
-        }
-        public void DataPackage(string DataPackage)
-        {
-            _dataPackage = DataPackage;
-        }
+        public string WidgetName() { return "TempUnitConversion"; }
+
+        public EWidgetType WidgetType() { return EWidgetType.Error; }
+
+        public string DataPackage() { return _dataPackage; }
+
+        public void DataPackage(string DataPackage) { _dataPackage = DataPackage; }
     }
 
     [MongoDB.Bson.Serialization.Attributes.BsonDiscriminator("TempUnitConversion")]
@@ -63,10 +51,8 @@ namespace Dashboard.Models.Widgets
 
         public override void Intake(string val)
         {
-            if (_temp == null)
-                _temp = val;
-            else
-                _toUnit = val;
+            if (_temp == null) _temp = val;
+            else _toUnit = val;
         }
 
         public override void Intake(int val) { }
@@ -77,10 +63,8 @@ namespace Dashboard.Models.Widgets
 
             try
             {
-                if (_toUnit == "F")
-                    value = (value * 9) / 5 + 32;
-                else if (_toUnit == "K")
-                    value = value + 273.15;
+                if (_toUnit == "F") value = (value * 9) / 5 + 32;
+                else if (_toUnit == "K") value = value + 273.15;
                 return new TempUnitConversionResult(value.ToString());
             }
             catch (SystemException e)

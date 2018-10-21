@@ -21,7 +21,6 @@ namespace Dashboard.Models
             Name = "";
             Widgets = new List<Widgets.IWidget>();
         }
-
         [BsonId]
         public ObjectId Id { get; set; }
         public string Name { get; set; }

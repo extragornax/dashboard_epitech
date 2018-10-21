@@ -24,27 +24,15 @@ namespace Dashboard.Models.Widgets
     {
         private string _dataPackage;
 
-        public TwitterResult(string DataPackage)
-        {
-            _dataPackage = DataPackage;
-        }
+        public TwitterResult(string DataPackage) { _dataPackage = DataPackage; }
 
-        public string WidgetName()
-        {
-            return "TwitterUserTweets";
-        }
-        public EWidgetType WidgetType()
-        {
-            return EWidgetType.WeatherConditon;
-        }
-        public string DataPackage()
-        {
-            return _dataPackage;
-        }
-        public void DataPackage(string data)
-        {
-            _dataPackage = data;
-        }
+        public string WidgetName() { return "TwitterUserTweets";}
+        
+        public EWidgetType WidgetType() { return EWidgetType.WeatherConditon; }
+        
+        public string DataPackage() { return _dataPackage; }
+        
+        public void DataPackage(string data) { _dataPackage = data; }
     }
 
     [MongoDB.Bson.Serialization.Attributes.BsonDiscriminator("Twitter")]
@@ -63,18 +51,14 @@ namespace Dashboard.Models.Widgets
             Parameters.Add(new Params { data = "user", type = "string" });
         }
 
-        public override void Intake(string value)
-        {
-            _user = value;
-        }
+        public override void Intake(string value) { _user = value; }
+
         public override void Intake(int val) { }
 
         public override IWidgetResult Invoke(User user)
         {
 
             string screenname = "epitech";
-
-
             try
             {
                 var auth = new SingleUserAuthorizer
@@ -112,7 +96,6 @@ namespace Dashboard.Models.Widgets
                     int rateLimitStatus = twitterCtx.RateLimitRemaining;
                     if (rateLimitStatus != 0)
                     {
-
                         statusResponse = (from tweet in twitterCtx.Status
                                           where tweet.Type == StatusType.User
                                           && tweet.ScreenName == screenname
@@ -125,15 +108,9 @@ namespace Dashboard.Models.Widgets
                             maxId = ulong.Parse(statusResponse.Last().StatusID.ToString()) - 1;
                             ownTweets.AddRange(statusResponse);
                         }
-                        else
-                        {
-                            flag = false;
-                        }
+                        else flag = false;
                     }
-                    else
-                    {
-                        flag = false;
-                    }
+                    else flag = false;
                 } while (flag);
 
                 ownTweets.ForEach(Console.WriteLine);

@@ -27,26 +27,23 @@ namespace Dashboard.Models
             _collection = _database.GetCollection<Widgets.IWidget>("Widget");
         }
 
-        public IEnumerable<Widgets.IWidget> GetAll()
-        {
-            return _collection.Find(new BsonDocument()).ToList();
-        }
+        public IEnumerable<Widgets.IWidget> GetAll() { return _collection.Find(new BsonDocument()).ToList(); }
 
         public long CountAll()
         {
-            var count = _collection.CountDocuments(new BsonDocument());
+            long count = _collection.CountDocuments(new BsonDocument());
             return count;
         }
 
         public Widgets.IWidget Get(string id)
         {
-            var filter = Builders<Widgets.IWidget>.Filter.Eq("_id", ObjectId.Parse(id));
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.Widgets.IWidget> filter = Builders<Widgets.IWidget>.Filter.Eq("_id", ObjectId.Parse(id));
             return _collection.Find(filter).FirstOrDefault();
         }
 
         public Widgets.IWidget GetByName(string name)
         {
-            var filter = Builders<Widgets.IWidget>.Filter.Eq("Name", name);
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.Widgets.IWidget> filter = Builders<Widgets.IWidget>.Filter.Eq("Name", name);
             return _collection.Find(filter).FirstOrDefault();
         }
 
@@ -58,21 +55,18 @@ namespace Dashboard.Models
 
         public bool Remove(string id)
         {
-            var filter = Builders<Widgets.IWidget>.Filter.Eq("_id", id);
-            var result = _collection.DeleteOne(filter);
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.Widgets.IWidget> filter = Builders<Widgets.IWidget>.Filter.Eq("_id", id);
+            MongoDB.Driver.DeleteResult result = _collection.DeleteOne(filter);
             return result.DeletedCount == 1;
         }
 
         public Widgets.IWidget Update(string id, Widgets.IWidget item)
         {
-            var filter = Builders<Widgets.IWidget>.Filter.Eq("_id", id);
-            var result = _collection.FindOneAndReplace(filter, item);
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.Widgets.IWidget> filter = Builders<Widgets.IWidget>.Filter.Eq("_id", id);
+            Dashboard.Models.Widgets.IWidget result = _collection.FindOneAndReplace(filter, item);
             return result;
         }
 
-        public void Drop()
-        {
-            _collection.DeleteMany(new BsonDocument());
-        }
+        public void Drop() { _collection.DeleteMany(new BsonDocument()); }
     }
 }

@@ -11,10 +11,7 @@ using System.Collections.Generic;
 namespace Dashboard.Models
 {
 
-    public class AboutClient
-    {
-        public string Host { get; set; }
-    }
+    public class AboutClient { public string Host { get; set; } }
 
     public class AboutServer
     {

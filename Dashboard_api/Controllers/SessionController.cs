@@ -23,23 +23,14 @@ namespace Dashboard.Controllers
         [HttpPost]
         public ActionResult<Models.User> Start(Models.User user)
         {
-            var match = userRepo.GetByName(user.Name);
-            if (match == null)
-            {
-                return NotFound();
-            }
-            if (match.Password != user.Password)
-            {
-                return Forbid();
-            }
-            var activeSession = sessionRepo.GetByUserId(match.Id.ToString());
-            if (activeSession == null)
-            {
-                activeSession = sessionRepo.Add(new Models.Session { UserId = match.Id });
-            }
-            match.SessionId = activeSession.Id;
-            match.Password = "";
-            return match;
+            Models.User userGetter = userRepo.GetByName(user.Name);
+            if (userGetter == null) return NotFound();
+            if (userGetter.Password != user.Password) return Forbid();
+            Models.Session activeSession = sessionRepo.GetByUserId(userGetter.Id.ToString());
+            if (activeSession == null) activeSession = sessionRepo.Add(new Models.Session { UserId = userGetter.Id });
+            userGetter.SessionId = activeSession.Id;
+            userGetter.Password = "";
+            return userGetter;
         }
     }
 }

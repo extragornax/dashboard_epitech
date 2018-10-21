@@ -21,27 +21,15 @@ namespace Dashboard.Models.Widgets
     {
         private string _dataPackage;
 
-        public WeatherConditionsResult(string DataPackage)
-        {
-            _dataPackage = DataPackage;
-        }
+        public WeatherConditionsResult(string DataPackage) { _dataPackage = DataPackage; }
 
-        public string WidgetName()
-        {
-            return "WeatherConditions";
-        }
-        public EWidgetType WidgetType()
-        {
-            return EWidgetType.WeatherConditon;
-        }
-        public string DataPackage()
-        {
-            return _dataPackage;
-        }
-        public void DataPackage(string data)
-        {
-            _dataPackage = data;
-        }
+        public string WidgetName() { return "WeatherConditions"; }
+
+        public EWidgetType WidgetType() { return EWidgetType.WeatherConditon; }
+
+        public string DataPackage() { return _dataPackage; }
+
+        public void DataPackage(string data) { _dataPackage = data; }
     }
 
     [MongoDB.Bson.Serialization.Attributes.BsonDiscriminator("WidgetWeatherConditions")]
@@ -57,10 +45,8 @@ namespace Dashboard.Models.Widgets
             Parameters.Add(new Params { data = "town", type = "string" });
         }
 
-        public override void Intake(string value)
-        {
-            town = value;
-        }
+        public override void Intake(string value) { town = value; }
+
         public override void Intake(int val) { }
 
         public override IWidgetResult Invoke(User user)
@@ -68,7 +54,7 @@ namespace Dashboard.Models.Widgets
             try
             {
                 string final_url = String.Format(url, town);
-                var cli = new WebClient();
+                System.Net.WebClient cli = new WebClient();
                 string data = cli.DownloadString(final_url);
                 Console.WriteLine("RETURNING -> " + data);
                 return new WeatherConditionsResult(data);
