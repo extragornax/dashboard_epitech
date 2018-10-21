@@ -25,19 +25,13 @@ namespace Dashboard.Controllers
         [HttpGet]
         public ActionResult<Models.About> Get()
         {
-            var context = Request.HttpContext;
-            var ip = context.Connection.RemoteIpAddress;
-
-            Console.WriteLine(ip);
-
-            var about = new Models.About();
+            Microsoft.AspNetCore.Http.HttpContext context = Request.HttpContext;
+            System.Net.IPAddress ip = context.Connection.RemoteIpAddress;
+            Dashboard.Models.About about = new Models.About();
 
             about.Client.Host = ip.ToString();
-
             about.Server.current_time = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-
             about.Server.Services = serviceRepo.GetAll();
-
             return about;
         }
     }

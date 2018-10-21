@@ -11,7 +11,6 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Dashboard.Models
 {
-
     public class User
     {
         [BsonId]

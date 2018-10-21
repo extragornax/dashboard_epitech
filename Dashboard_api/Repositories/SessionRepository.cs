@@ -34,19 +34,19 @@ namespace Dashboard.Models
 
         public long CountAll()
         {
-            var count = _collection.CountDocuments(new BsonDocument());
+            long count = _collection.CountDocuments(new BsonDocument());
             return count;
         }
 
         public Session Get(string id)
         {
-            var filter = Builders<Session>.Filter.Eq("_id", ObjectId.Parse(id));
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.Session> filter = Builders<Session>.Filter.Eq("_id", ObjectId.Parse(id));
             return _collection.Find(filter).FirstOrDefault();
         }
 
         public Session GetByUserId(string userId)
         {
-            var filter = Builders<Session>.Filter.Eq("UserId", ObjectId.Parse(userId));
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.Session> filter = Builders<Session>.Filter.Eq("UserId", ObjectId.Parse(userId));
             return _collection.Find(filter).FirstOrDefault();
         }
 
@@ -58,15 +58,15 @@ namespace Dashboard.Models
 
         public bool Remove(string id)
         {
-            var filter = Builders<Session>.Filter.Eq("_id", id);
-            var result = _collection.DeleteOne(filter);
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.Session> filter = Builders<Session>.Filter.Eq("_id", id);
+            MongoDB.Driver.DeleteResult result = _collection.DeleteOne(filter);
             return result.DeletedCount == 1;
         }
 
         public Session Update(string id, Session item)
         {
-            var filter = Builders<Session>.Filter.Eq("_id", id);
-            var result = _collection.FindOneAndReplace(filter, item);
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.Session> filter = Builders<Session>.Filter.Eq("_id", id);
+            Dashboard.Models.Session result = _collection.FindOneAndReplace(filter, item);
             return result;
         }
     }

@@ -20,19 +20,18 @@ namespace Dashboard.Models
 
         public ServiceRepository(string connection)
         {
-            if (string.IsNullOrWhiteSpace(connection))
-                connection = "mongodb://root:example@localhost:27017";
+            if (string.IsNullOrWhiteSpace(connection)) connection = "mongodb://root:example@localhost:27017";
             _dbClient = new MongoDB.Driver.MongoClient(connection);
             _database = _dbClient.GetDatabase("dashboard");
             _collection = _database.GetCollection<Service>("Service");
-            var count = _collection.CountDocuments(new BsonDocument());
+            long count = _collection.CountDocuments(new BsonDocument());
 
             if (count == 0)
             {
-                var widgets = new WidgetRepository("");
+                Dashboard.Models.WidgetRepository widgets = new WidgetRepository("");
                 widgets.Drop();
                 _collection.DeleteMany(new BsonDocument());
-                var service = new Service();
+                Dashboard.Models.Service service = new Service();
                 service.Name = "weather";
                 IWidget widget = new Widgets.WeatherConditions();
                 widgets.Add(widget);
@@ -42,6 +41,20 @@ namespace Dashboard.Models
                 service = new Service();
                 service.Name = "rss";
                 widget = new Widgets.RssFeed();
+                widgets.Add(widget);
+                service.Widgets.Add(widget);
+                _collection.InsertOne(service);
+
+                service = new Service();
+                service.Name = "tempconversion";
+                widget = new Widgets.TempUnitConversion();
+                widgets.Add(widget);
+                service.Widgets.Add(widget);
+                _collection.InsertOne(service);
+
+                service = new Service();
+                service.Name = "twittertweets";
+                widget = new Widgets.Twitter();
                 widgets.Add(widget);
                 service.Widgets.Add(widget);
                 _collection.InsertOne(service);
@@ -55,19 +68,19 @@ namespace Dashboard.Models
 
         public long CountAll()
         {
-            var count = _collection.CountDocuments(new BsonDocument());
+            long count = _collection.CountDocuments(new BsonDocument());
             return count;
         }
 
         public Service Get(string id)
         {
-            var filter = Builders<Service>.Filter.Eq("_id", ObjectId.Parse(id));
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.Service> filter = Builders<Service>.Filter.Eq("_id", ObjectId.Parse(id));
             return _collection.Find(filter).FirstOrDefault();
         }
 
         public Service GetByName(string name)
         {
-            var filter = Builders<Service>.Filter.Eq("Name", name);
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.Service> filter = Builders<Service>.Filter.Eq("Name", name);
             return _collection.Find(filter).FirstOrDefault();
         }
 
@@ -79,15 +92,15 @@ namespace Dashboard.Models
 
         public bool Remove(string id)
         {
-            var filter = Builders<Service>.Filter.Eq("_id", id);
-            var result = _collection.DeleteOne(filter);
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.Service> filter = Builders<Service>.Filter.Eq("_id", id);
+            MongoDB.Driver.DeleteResult result = _collection.DeleteOne(filter);
             return result.DeletedCount == 1;
         }
 
         public Service Update(string id, Service item)
         {
-            var filter = Builders<Service>.Filter.Eq("_id", id);
-            var result = _collection.FindOneAndReplace(filter, item);
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.Service> filter = Builders<Service>.Filter.Eq("_id", id);
+            Dashboard.Models.Service result = _collection.FindOneAndReplace(filter, item);
             return result;
         }
     }

@@ -26,31 +26,28 @@ namespace Dashboard.Models
             _database = _dbClient.GetDatabase("dashboard");
             _collection = _database.GetCollection<User>("User");
 
-            Widgets.IWidget kappa = new Widgets.WeatherConditions();
-            kappa.Intake("Paris,fr");
-            kappa.Invoke(new User());
+            Widgets.IWidget Weather = new Widgets.WeatherConditions();
+            Weather.Intake("Paris,fr");
+            Weather.Invoke(new User());
         }
 
-        public IEnumerable<User> GetAll()
-        {
-            return _collection.Find(new BsonDocument()).ToList();
-        }
+        public IEnumerable<User> GetAll() { return _collection.Find(new BsonDocument()).ToList(); }
 
         public long CountAll()
         {
-            var count = _collection.CountDocuments(new BsonDocument());
+            long count = _collection.CountDocuments(new BsonDocument());
             return count;
         }
 
         public User Get(string id)
         {
-            var filter = Builders<User>.Filter.Eq("_id", ObjectId.Parse(id));
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.User> filter = Builders<User>.Filter.Eq("_id", ObjectId.Parse(id));
             return _collection.Find(filter).FirstOrDefault();
         }
 
         public User GetByName(string name)
         {
-            var filter = Builders<User>.Filter.Eq("Name", name);
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.User> filter = Builders<User>.Filter.Eq("Name", name);
             return _collection.Find(filter).FirstOrDefault();
         }
 
@@ -62,15 +59,15 @@ namespace Dashboard.Models
 
         public bool Remove(string id)
         {
-            var filter = Builders<User>.Filter.Eq("_id", id);
-            var result = _collection.DeleteOne(filter);
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.User> filter = Builders<User>.Filter.Eq("_id", id);
+            MongoDB.Driver.DeleteResult result = _collection.DeleteOne(filter);
             return result.DeletedCount == 1;
         }
 
         public User Update(string id, User item)
         {
-            var filter = Builders<User>.Filter.Eq("_id", id);
-            var result = _collection.FindOneAndReplace(filter, item);
+            MongoDB.Driver.FilterDefinition<Dashboard.Models.User> filter = Builders<User>.Filter.Eq("_id", id);
+            Dashboard.Models.User result = _collection.FindOneAndReplace(filter, item);
             return result;
         }
     }

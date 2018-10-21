@@ -24,27 +24,15 @@ namespace Dashboard.Models.Widgets
     {
         private string _dataPackage;
 
-        public RssFeedResult(string DataPackage)
-        {
-            _dataPackage = DataPackage;
-        }
+        public RssFeedResult(string DataPackage) { _dataPackage = DataPackage; }
 
-        public string WidgetName()
-        {
-            return "RssFeed";
-        }
-        public EWidgetType WidgetType()
-        {
-            return EWidgetType.Error;
-        }
-        public string DataPackage()
-        {
-            return _dataPackage;
-        }
-        public void DataPackage(string DataPackage)
-        {
-            _dataPackage = DataPackage;
-        }
+        public string WidgetName() { return "RssFeed"; }
+
+        public EWidgetType WidgetType() { return EWidgetType.Error; }
+
+        public string DataPackage() { return _dataPackage; }
+
+        public void DataPackage(string DataPackage) { _dataPackage = DataPackage; }
     }
 
     [MongoDB.Bson.Serialization.Attributes.BsonDiscriminator("RssFeed")]
@@ -72,7 +60,7 @@ namespace Dashboard.Models.Widgets
         {
             try
             {
-                var cli = new WebClient();
+                System.Net.WebClient cli = new WebClient();
                 string data = cli.DownloadString(_url);
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(data);

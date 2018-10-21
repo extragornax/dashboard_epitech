@@ -16,24 +16,18 @@ namespace Dashboard.Controllers
     [ApiController]
     public class ServiceController : ControllerBase
     {
-        private static Models.ServiceRepository serviceRepo = new Models.ServiceRepository("");
+        private static Models.ServiceRepository services = new Models.ServiceRepository("");
 
         public ServiceController() { }
 
         [HttpGet]
-        public ActionResult<List<Models.Service>> GetAll()
-        {
-            return serviceRepo.GetAll().ToList();
-        }
+        public ActionResult<List<Models.Service>> GetAll() { return services.GetAll().ToList(); }
 
         [HttpGet("{id}", Name = "GetService")]
         public ActionResult<Models.Service> GetById(string id)
         {
-            var item = serviceRepo.Get(id);
-            if (item == null)
-            {
-                return NotFound();
-            }
+            Service item = services.Get(id);
+            if (item == null) return NotFound();
             return item;
         }
 

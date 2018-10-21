@@ -20,6 +20,8 @@ namespace Dashboard.Models.Widgets
         Error,
         WeatherConditon,
         RssFeed,
+        TempUnitConversion,
+        Twitter,
     }
 
     public interface IWidgetResult
@@ -31,18 +33,11 @@ namespace Dashboard.Models.Widgets
 
     public class WidgetError : IWidgetResult
     {
-        public string WidgetName()
-        {
-            return "Error";
-        }
-        public EWidgetType WidgetType()
-        {
-            return EWidgetType.Error;
-        }
-        public string DataPackage()
-        {
-            return "";
-        }
+        public string WidgetName() { return "Error"; }
+
+        public EWidgetType WidgetType() { return EWidgetType.Error; }
+
+        public string DataPackage() { return ""; }
     }
 
     public class Params
@@ -51,7 +46,7 @@ namespace Dashboard.Models.Widgets
         public string type;
     }
 
-    [BsonKnownTypes(typeof(RssFeed), typeof(WeatherConditions))]
+    [BsonKnownTypes(typeof(RssFeed), typeof(WeatherConditions), typeof(TempUnitConversion))]
     public abstract class IWidget
     {
         public ObjectId Id { get; set; }
@@ -60,14 +55,12 @@ namespace Dashboard.Models.Widgets
         public readonly string ServiceName;
         [JsonProperty(PropertyName = "params")]
         public List<Params> Parameters;
-
         public IWidget(string name, EWidgetType type, string serviceName)
         {
             Name = name;
             Type = type;
             ServiceName = serviceName;
         }
-
         abstract public void Intake(string val);
         abstract public void Intake(int val);
         abstract public IWidgetResult Invoke(User user);
