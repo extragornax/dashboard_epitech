@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardHeader, CardBody, CardFooter } from "react-simple-card";
+import { Card, CardHeader, CardBody } from "react-simple-card";
 
 const Widget = ({ title, content }) => (
     <>
