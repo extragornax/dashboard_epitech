@@ -10,6 +10,7 @@ export default class WidgetsContainer extends Component {
 	this.state = {
 		data: [],
 		meteoData: [],
+		meteoDataSky: [],
 		apiWidgetAPI: "api/Widget/",
 		test: "ck",
 		ServiceList:"/api/Service/",
@@ -44,7 +45,8 @@ componentDidMount() {
 		this.setState({rssURL: this.createAPIRequest(this.data[1].widgets[0].id)});
 	}).then(res => {
 		axios.get(this.state.meteoURL).then(rep => {
-			this.setState({meteoData: rep.data})
+			this.setState({meteoData: rep.data.main})
+			this.setState({meteoDataSky: rep.data.weather[0]})
 		});
 		axios.get(this.state.rssURL).then(rep => {
 			this.setState({rssData: rep.data});
@@ -79,9 +81,20 @@ getRSSName() {
 		</div>		
 		)
 	}
+
 	getMeteo() {
-		console.log(this.state.meteoData);
-	}
+	return (
+
+		<div>
+		<ul>
+			<p>Temperature: {this.state.meteoData.temp}</p>
+			<p>Temperature Min: {this.state.meteoData.temp_min}</p>
+			<p>Temperature Max: {this.state.meteoData.temp_max}</p>
+			<p>Weather: {this.state.meteoDataSky.description}</p>
+		</ul>
+		</div>
+		)
+}
 	
 getRSSList() {
 	return (
