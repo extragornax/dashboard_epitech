@@ -16,5 +16,4 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
   frontend:
     build: ./Dashboard_front
-    ports:
-      - "3000:3000"
+    network_mode: "host"

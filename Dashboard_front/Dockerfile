@@ -6,10 +6,10 @@ COPY package*.json /webapp/
 
 RUN npm install -v
 
-ENV PORT=3000
+ENV PORT=80
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 80
 
 CMD [ "npm", "start" ]
