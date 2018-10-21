@@ -52,6 +52,13 @@ namespace Dashboard.Models
                 widgets.Add(widget);
                 service.Widgets.Add(widget);
                 _collection.InsertOne(service);
+
+                service = new Service();
+                service.Name = "twittertweets";
+                widget = new Widgets.Twitter();
+                widgets.Add(widget);
+                service.Widgets.Add(widget);
+                _collection.InsertOne(service);
             }
         }
 

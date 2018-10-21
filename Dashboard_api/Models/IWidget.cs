@@ -21,6 +21,7 @@ namespace Dashboard.Models.Widgets
         WeatherConditon,
         RssFeed,
         TempUnitConversion,
+        Twitter,
     }
 
     public interface IWidgetResult

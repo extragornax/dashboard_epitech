@@ -54,7 +54,7 @@ namespace Dashboard.Models.Widgets
         private string _temp = null;
         private string _toUnit = "C";
 
-        public TempUnitConversion() : base("TempUnitConversion", EWidgetType.RssFeed, "TempConversion")
+        public TempUnitConversion() : base("TempUnitConversion", EWidgetType.TempUnitConversion, "TempConversion")
         {
             Parameters = new List<Params>();
             Parameters.Add(new Params { data = "Ctemp", type = "string" });
@@ -81,8 +81,6 @@ namespace Dashboard.Models.Widgets
                     value = (value * 9) / 5 + 32;
                 else if (_toUnit == "K")
                     value = value + 273.15;
-                else
-                    return new TempUnitConversionResult("ERROR");
                 return new TempUnitConversionResult(value.ToString());
             }
             catch (SystemException e)
