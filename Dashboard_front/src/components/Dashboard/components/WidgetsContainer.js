@@ -18,6 +18,7 @@ export default class WidgetsContainer extends Component {
 		rssURL:"",
 		rssData: [],
 		setter: 0,
+		celcius: 1,
 		cat: [],
 		rssFlux0: [],
 		rssFlux1: [],
@@ -37,6 +38,7 @@ export default class WidgetsContainer extends Component {
 		rssFlux15: [],
 	}
 	this.getMeteo=this.getMeteo.bind(this);
+	this.changeUnity=this.changeUnity.bind(this);
 }
 componentDidMount() {
 	axios.get('/api/Service').then(res => {
@@ -82,18 +84,33 @@ getRSSName() {
 		)
 	}
 
-	getMeteo() {
-	return (
+makeFahr(cel) {
+	cel = (cel * (9 / 5)) + 32;
+	return cel;
+}
 
-		<div>
-		<ul>
-			<p>Temperature: {this.state.meteoData.temp}</p>
-			<p>Temperature Min: {this.state.meteoData.temp_min}</p>
-			<p>Temperature Max: {this.state.meteoData.temp_max}</p>
-			<p>Weather: {this.state.meteoDataSky.description}</p>
-		</ul>
-		</div>
-		)
+getMeteo() {
+	let temp = this.state.meteoData.temp - 273;
+	let temp_min = this.state.meteoData.temp_min - 273;
+	let temp_max = this.state.meteoData.temp_max - 273;
+	let weather = this.state.meteoDataSky.description;
+	if (!this.state.celcius) {
+		temp = this.makeFahr(temp); 
+		temp_min = this.makeFahr(temp_min); 
+		temp_max = this.makeFahr(temp_max); 
+	}
+		return (
+			
+			<div>
+				<p>Paris</p>
+				<ul>
+					<p>Temperature: {temp.toFixed(1)}</p>
+					<p>Temperature Min: {temp_min.toFixed(1)}</p>
+					<p>Temperature Max: {temp_max.toFixed(1)}</p>
+					<p>Weather: {weather}</p>
+				</ul>
+				</div>
+				)
 }
 	
 getRSSList() {
@@ -181,11 +198,29 @@ getRSSList() {
 
 	)
 }
+
+changeUnity() {
+	if (!this.state.celcius) {
+		this.setState({celcius: 1});
+	} else {
+		this.setState({celcius: 0});
+	}
+}
+
+changeMeteoValue() {
+	return (
+		<div>
+			<p>Météo</p>
+			<button onClick={this.changeUnity}>C°/F°</button>
+		</div>
+	)
+}
+
     render() {
         return (
             <div className="widgets-container">
                 <Widget
-                    title="Météo"
+                    title={this.changeMeteoValue()}
                     content={this.getMeteo()}
                 />
                 <Widget
